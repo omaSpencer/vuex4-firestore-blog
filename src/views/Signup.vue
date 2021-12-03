@@ -1,30 +1,35 @@
 <template>
-  <form @submit.prevent="handleSubmit">
-    <h3>Sign up</h3>
+	<form @submit.prevent="handleSubmit">
+		<h3>Sign up</h3>
 
-    <label for="email">Email:</label>
-    <input type="email" name="email" v-model="email" required>
+		<label for="email">Email:</label>
+		<input type="email" name="email" v-model="email" required />
 
-    <label for="email">Password:</label>
-    <input type="password" name="password" v-model="password" required>
+		<label for="email">Password:</label>
+		<input type="password" name="password" v-model="password" required />
 
-    <button>Sign up</button>
-  </form>
+		<button>Sign up</button>
+	</form>
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref } from 'vue';
+import { useStore } from 'vuex';
 
 export default {
-  setup() {
-    const email = ref('')
-    const password = ref('')
+	setup() {
+		const store = useStore();
+		const email = ref('');
+		const password = ref('');
 
-    const handleSubmit = () => {
-      console.log(email.value, password.value)
-    }
+		const handleSubmit = () => {
+			store.dispatch('signup', {
+				email: email.value,
+				password: password.value,
+			});
+		};
 
-    return { handleSubmit, email, password }
-  }
-}
+		return { handleSubmit, email, password };
+	},
+};
 </script>
