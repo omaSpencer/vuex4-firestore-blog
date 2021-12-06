@@ -28,7 +28,6 @@ export default {
 	setup() {
 		const store = useStore();
 		console.log(store.state.user);
-		store.commit('setUser', 'spencer');
 
 		const blogs = ref([
 			{ title: 'Why Coffee is Better than Tea', id: 1 },
