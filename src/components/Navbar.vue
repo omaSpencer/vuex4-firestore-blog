@@ -6,12 +6,12 @@
 			<router-link to="/">Home</router-link>
 		</div>
 		<!-- for logged in users -->
-		<div>
-			<span>Logged in as...</span>
+		<div v-if="user">
+			<span>Logged in as {{ user.email }}</span>
 			<button @click="handleClick">Logout</button>
 		</div>
 		<!-- for logged out users -->
-		<div>
+		<div v-else>
 			<router-link to="/login">Login</router-link>
 			<router-link to="/signup">Signup</router-link>
 		</div>
@@ -20,6 +20,7 @@
 
 <script>
 import { useStore } from 'vuex';
+import { computed } from 'vue';
 export default {
 	setup() {
 		const store = useStore();
@@ -28,7 +29,7 @@ export default {
 			store.dispatch('logout');
 		};
 
-		return { handleClick };
+		return { handleClick, user: computed(() => store.state.user) };
 	},
 };
 </script>
